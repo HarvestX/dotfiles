@@ -1,0 +1,10 @@
+[user]
+  email = m12watanabe1a@gmail.com
+  name = m12watanabe1a
+[alias]
+  br = branch
+  cm = commit
+  co = checkout
+[init]
+  defaultBranch = main
+
