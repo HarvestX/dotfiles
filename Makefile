@@ -2,7 +2,7 @@
 
 bin_dir = $(HOME)/.local/bin
 
-install: tmux nvim fzf
+install: tmux nvim fzf vimplug
 
 config:
 	./config/install.sh
