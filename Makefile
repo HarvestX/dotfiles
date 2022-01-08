@@ -2,6 +2,8 @@
 
 bin_dir = $(HOME)/.local/bin
 
+all: config install
+
 install: tmux nvim fzf vimplug
 
 config:
