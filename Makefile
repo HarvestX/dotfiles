@@ -18,10 +18,10 @@ install: tmux nvim fzf vimplug
 config:
 	./config/install.sh
 
-tmux: $(TMUX_DIR)/temp/tmux
+tmux:
 	$(TMUX_DIR)/install.sh
 
-nvim: $(NVIM_DIR)/temp/nvim
+nvim:
 	$(NVIM_DIR)/install.sh
 
 vimplug:
