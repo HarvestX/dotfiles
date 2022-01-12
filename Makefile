@@ -30,6 +30,15 @@ vimplug:
 fzf:
 	./install/fzf/install.sh
 
-ubuntu-setup:
-	sudo apt update
+ubuntu-setup: ubuntu-ssh-server
 	sudo apt install -y xsel
+
+ubuntu-ssh-server:
+	sudo apt install openssh-server x11vnc xvfb lightdm
+	$(shell sed -i 's/#Port 22/Port 50000/g' /etc/ssh/sshd_config)
+	sudo service ssh restart
+	sudo x11vnc -storepasswd /etc/.vncpasswd
+	sudo cp system/x11vnc.service /etc/systemd/system/x11vnc.service
+	sudo systemctl enable x11vnc.service
+	sudo systemctl start x11vnc.service
+
