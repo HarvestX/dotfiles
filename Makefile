@@ -41,7 +41,7 @@ ubuntu-setup:
 
 ubuntu-ssh-server: ubuntu-setup
 	sudo apt install -y openssh-server x11vnc xvfb lightdm jq
-	$(shell sed -i 's/#Port 22/Port 50000/g' /etc/ssh/sshd_config)
+	$(shell sudo sed -i 's/#Port 22/Port 50000/g' /etc/ssh/sshd_config)
 	sudo service ssh restart
 	sudo x11vnc -storepasswd /etc/.vncpasswd
 	sudo cp system/x11vnc.service /etc/systemd/system/x11vnc.service
