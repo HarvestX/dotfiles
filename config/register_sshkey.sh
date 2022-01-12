@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
+organization="HarvestX"
 target=$HOME/.ssh/authorized_keys
 
-echo '# HarvestX members' > $target
-for row in $(gh api /orgs/HarvestX/members | \
+echo "# $organization members" > $target
+for row in $(gh api /orgs/$organization/members | \
   jq -r '.[] | {type: .type, username: .login} | select( .type | contains("User")) | { username: .username } | @base64'
 ); do
   _jq() {
@@ -14,4 +15,5 @@ for row in $(gh api /orgs/HarvestX/members | \
   wget -qO- https://github.com/${username}.keys >> $target
 done
 
-unset target username row
+unset target username row organization
+
