@@ -1,28 +1,28 @@
-.PHONY: config
+.PHONY: config deploy vimplug fzf ubuntu-setup
 
-bin_dir = $(HOME)/.local/bin
+ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+BIN_DIR = $(ROOT_DIR)/bin
 
-all: config install
+TMUX_DIR = ./install/tmux
+NVIM_DIR = ./install/nvim
+
+all: config install deploy
+
+deploy: tmux nvim
+	mkdir -p $(BIN_DIR)
+	cp $(TMUX_DIR)/temp/tmux $(BIN_DIR)/tmux
+	cp $(NVIM_DIR)/temp/nvim $(BIN_DIR)/nvim
 
 install: tmux nvim fzf vimplug
 
 config:
 	./config/install.sh
 
+tmux: $(TMUX_DIR)/temp/tmux
+	$(TMUX_DIR)/install.sh
 
-tmux_dir = ./install/tmux
-$(tmux_dir)/temp/tmux:
-	$(tmux_dir)/install.sh
-
-tmux: $(tmux_dir)/temp/tmux
-	cp $(tmux_dir)/temp/tmux $(bin_dir)/tmux
-
-nvim_dir = ./install/nvim
-$(nvim_dir)/temp/nvim:
-	$(nvim_dir)/install.sh
-
-nvim: $(nvim_dir)/temp/nvim
-	cp $(nvim_dir)/temp/nvim $(bin_dir)/nvim
+nvim: $(NVIM_DIR)/temp/nvim
+	$(NVIM_DIR)/install.sh
 
 vimplug:
 	./install/vimplug/install.sh
@@ -30,3 +30,6 @@ vimplug:
 fzf:
 	./install/fzf/install.sh
 
+ubuntu-setup:
+	sudo apt update
+	sudo apt install -y xsel
