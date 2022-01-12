@@ -5,13 +5,15 @@ BIN_DIR = $(ROOT_DIR)/bin
 
 TMUX_DIR = ./install/tmux
 NVIM_DIR = ./install/nvim
+GITHUB_CLI_DIR = ./install/gh-cli
 
 all: config install deploy
 
-deploy: tmux nvim
+deploy: tmux nvim github-cli
 	mkdir -p $(BIN_DIR)
 	cp $(TMUX_DIR)/temp/tmux $(BIN_DIR)/tmux
 	cp $(NVIM_DIR)/temp/nvim $(BIN_DIR)/nvim
+	cp $(GITHUB_CLI_DIR)/temp/build/gh $(BIN_DIR)/gh
 
 install: tmux nvim fzf vimplug
 
@@ -23,6 +25,9 @@ tmux:
 
 nvim:
 	$(NVIM_DIR)/install.sh
+
+github-cli:
+	$(GITHUB_CLI_DIR)/install.sh
 
 vimplug:
 	./install/vimplug/install.sh
@@ -41,4 +46,5 @@ ubuntu-ssh-server:
 	sudo cp system/x11vnc.service /etc/systemd/system/x11vnc.service
 	sudo systemctl enable x11vnc.service
 	sudo systemctl start x11vnc.service
+	./config/register_sshkey.sh
 
