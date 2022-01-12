@@ -39,7 +39,7 @@ ubuntu-setup: ubuntu-ssh-server
 	sudo apt install -y xsel
 
 ubuntu-ssh-server:
-	sudo apt install openssh-server x11vnc xvfb lightdm
+	sudo apt install openssh-server x11vnc xvfb lightdm jq
 	$(shell sed -i 's/#Port 22/Port 50000/g' /etc/ssh/sshd_config)
 	sudo service ssh restart
 	sudo x11vnc -storepasswd /etc/.vncpasswd
