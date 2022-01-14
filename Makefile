@@ -15,6 +15,7 @@ deploy: tmux nvim github-cli
 	cp $(NVIM_DIR)/temp/nvim $(BIN_DIR)/nvim
 	cp $(GITHUB_CLI_DIR)/temp/build/gh $(BIN_DIR)/gh
 	$(BIN_DIR)/gh auth login
+	$(shell exec -l $SHELL)
 
 install: tmux nvim fzf vimplug
 

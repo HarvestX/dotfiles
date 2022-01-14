@@ -3,7 +3,7 @@
 organization="HarvestX"
 target=$HOME/.ssh/authorized_keys
 
-if [ -z "$organization"]
+if [ -n "$organization" ]
 then
 
   echo "# $organization members" > $target
