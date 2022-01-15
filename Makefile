@@ -37,9 +37,6 @@ vimplug:
 fzf:
 	./install/fzf/install.sh
 
-ubuntu-setup:
-	sudo apt install -y xsel
-
 ubuntu-ssh-server: ubuntu-setup
 	sudo apt install -y openssh-server x11vnc xvfb lightdm jq
 	$(shell sudo sed -i 's/#Port 22/Port 50000/g' /etc/ssh/sshd_config)
@@ -49,4 +46,16 @@ ubuntu-ssh-server: ubuntu-setup
 	sudo systemctl enable x11vnc.service
 	sudo systemctl start x11vnc.service
 	./config/register_sshkey.sh
+
+ubuntu-setup: ubuntu-ros2 ubuntu-vscode ubuntu-docker
+	sudo apt install -y xsel
+
+ubuntu-ros2:
+	./install/ros2/install_foxy.sh
+
+ubuntu-vscode:
+	./install/vscode/install.sh
+
+ubuntu-docker:
+	./install/docker/install.sh
 
