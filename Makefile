@@ -47,7 +47,7 @@ ubuntu-ssh-server: ubuntu-setup
 	sudo systemctl start x11vnc.service
 	./config/register_sshkey.sh
 
-ubuntu-setup: ubuntu-ros2 ubuntu-vscode ubuntu-docker
+ubuntu-install-optional: ubuntu-ros2 ubuntu-vscode ubuntu-docker
 	sudo apt install -y xsel
 
 ubuntu-ros2:
