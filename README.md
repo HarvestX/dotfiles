@@ -23,7 +23,7 @@ make config
 ```
 
 
-## Optinal Packages (Only supported for Ubuntu 20.04)
+## Optinal Packages (Ubuntu 20.04)
 - docker & docker-compose
 - ros2
 - vscode
@@ -32,7 +32,7 @@ To install optional packages, type
 ```bash
 make ubuntu-install-optional
 ```
-## SSH server and x11vnc setup
+## SSH server and x11vnc setup (Ubuntu 20.04)
 To setup ssh server and x11vnc,
 ```bash
 make ubuntu-config-ssh-server
