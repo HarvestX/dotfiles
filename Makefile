@@ -9,7 +9,7 @@ GITHUB_CLI_DIR = ./install/gh-cli
 
 all: config install deploy
 
-deploy: tmux nvim github-cli
+deploy: install
 	mkdir -p $(BIN_DIR)
 	cp $(TMUX_DIR)/temp/tmux $(BIN_DIR)/tmux
 	cp $(NVIM_DIR)/temp/nvim $(BIN_DIR)/nvim
@@ -17,7 +17,7 @@ deploy: tmux nvim github-cli
 	$(BIN_DIR)/gh auth login
 	$(shell exec -l $SHELL)
 
-install: tmux nvim fzf vimplug
+install: tmux nvim fzf vimplug github-cli
 
 config:
 	./config/install.sh
