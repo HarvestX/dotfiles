@@ -37,7 +37,7 @@ vimplug:
 fzf:
 	./install/fzf/install.sh
 
-ubuntu-ssh-server: ubuntu-setup
+ubuntu-config-ssh-server: ubuntu-setup
 	sudo apt install -y openssh-server x11vnc xvfb lightdm jq
 	$(shell sudo sed -i 's/#Port 22/Port 50000/g' /etc/ssh/sshd_config)
 	sudo service ssh restart
