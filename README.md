@@ -1,7 +1,7 @@
 # dotfiles
 HarvestX dotfiles for Unix shell
 
-### About
+## About
 This Repository contains installation script and configurations for esseintial tools.
 
 
