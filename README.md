@@ -13,7 +13,7 @@ This Repository contains installation script and configurations for esseintial t
 
 To setup, type
 ```bash
-make install deploy
+make deploy
 ```
 
 ## Configuration
