@@ -37,5 +37,8 @@ To setup ssh server and x11vnc,
 ```bash
 make ubuntu-config-ssh-server
 ```
-And it will ask vnc password.
+And it will ask
+- SSH port to open.
+- vnc password.
+- x11vnc forwarding port to open.
 
