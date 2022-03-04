@@ -34,7 +34,7 @@ link_to_homedir() {
       if [[ -L $installed_d ]];then
         command rm -rf "$installed_d"
       fi
-      command ln -snf $d $install_dir
+      command cp -r $d $install_dir
     done
   else
     command echo "same install src dest"
