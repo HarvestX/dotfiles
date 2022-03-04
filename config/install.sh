@@ -20,21 +20,25 @@ ask() {
   done
 }
 
-
 link_to_homedir() {
   local install_dir="$HOME/.config"
   local dotdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
-  if [[ "$HOME" != "$dotdir" ]];then
-    local dirs=`find $dotdir/* -maxdepth 0 -type d`
-    for d in $dirs;
-    do
-      [[ `basename $d` == ".git" ]] && continue
-      [[ `basename $d` == ".github" ]] && continue
-      local installed_d=$install_dir/`basename $d`
-      if [[ -L $installed_d ]];then
+  if [[ "$HOME" != "$dotdir" ]]; then
+    local dirs=$(find $dotdir/* -maxdepth 0 -type d)
+    for d in $dirs; do
+      [[ $(basename $d) == ".git" ]] && continue
+      [[ $(basename $d) == ".github" ]] && continue
+      local installed_d=$install_dir/$(basename $d)
+      if [[ -L $installed_d ]] || [[ -d $installed_d ]]; then
         command rm -rf "$installed_d"
       fi
-      command cp -r $d $install_dir
+      ## copy git config because it will chanage
+      # username and user email address
+      if [[ $(basename $d) == "git" ]]; then
+        command cp -r $d $install_dir
+      else
+        command ln -snf $d $install_dir
+      fi
     done
   else
     command echo "same install src dest"
@@ -64,8 +68,8 @@ append_line() {
     echo "    - Already exists: line #$lno"
   else
     if [ $update -eq 1 ]; then
-      [ -f "$file" ] && echo >> "$file"
-      echo "$line" >> "$file"
+      [ -f "$file" ] && echo >>"$file"
+      echo "$line" >>"$file"
       echo "    + Added"
     else
       echo "    ~ Skipped"
@@ -78,7 +82,7 @@ append_line() {
 update_shell() {
   shells="bash zsh fish"
   echo
-  update_config=`ask "Do you want to update your shell configuration files?"`
+  update_config=$(ask "Do you want to update your shell configuration files?")
   echo
   local prefix="$HOME/.config"
   for shell in $shells; do
@@ -90,17 +94,17 @@ update_shell() {
   done
 }
 
-while [ $# -gt 0 ];do
+while [ $# -gt 0 ]; do
   case ${1} in
-    --debug|-d)
-      set -uex
-      ;;
-    --help|-h)
-      helpmsg
-      exit 1
-      ;;
-    *)
-      ;;
+  --debug | -d)
+    set -uex
+    ;;
+  --help | -h)
+    helpmsg
+    exit 1
+    ;;
+  *) ;;
+
   esac
   shift
 done
@@ -109,4 +113,3 @@ link_to_homedir
 update_shell
 
 command echo -e "\e[1;36m Install completed 🍺\e[m"
-
