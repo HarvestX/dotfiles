@@ -8,8 +8,9 @@ This Repository contains installation script and configurations for esseintial t
 ## Pasckages
 - tmux
 - nvim
-- github-cli
+- fzf
 - vimplug
+- github-cli
 
 To setup, type
 ```bash
@@ -27,6 +28,7 @@ make config
 - docker & docker-compose
 - ros2
 - vscode
+- openocd
 
 To install optional packages, type
 ```bash
