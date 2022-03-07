@@ -45,7 +45,7 @@ ubuntu-install-optional: ubuntu-ros2 ubuntu-vscode ubuntu-docker ubuntu-openocd
 	sudo apt install -y xsel
 
 ubuntu-ros2:
-	./install/ros2/install_foxy.sh
+./install/ros2/install_galactic.sh
 
 ubuntu-vscode:
 	./install/vscode/install.sh
