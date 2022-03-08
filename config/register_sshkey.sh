@@ -3,10 +3,11 @@
 organization="HarvestX"
 target=$HOME/.ssh/authorized_keys
 
-if [ -n "$organization" ]; then
-  printf "Regiser to: $target\n"
-
-  echo "# $organization members" >$target
+get_org_users() {
+  ## get_username_list organization
+  local username
+  local usernames=()
+  local organization=$1
   for row in $(
     gh api /orgs/$organization/members |
       jq -r '.[] | {type: .type, username: .login} | select( .type | contains("User")) | { username: .username } | @base64'
@@ -15,9 +16,46 @@ if [ -n "$organization" ]; then
       echo ${row} | base64 --decode | jq -r ${1}
     }
     username=$(_jq '.username')
-    echo "Add: $username"
-    wget -qO- https://github.com/${username}.keys >>$target
+    usernames+=("$username")
   done
-  unset username row
+  echo "${usernames[@]}"
+}
+
+register_key() {
+  # register_key $username $target
+  local username=$1
+  local target=$2
+  printf "$username >> $target\n"
+  wget -qO- https://github.com/${username}.keys >>$target
+}
+
+usernames=$(get_org_users $organization)
+
+printf "Gettig username from $organization\n"
+printf "Add keys to $target\n"
+echo "# $organization members" >$target
+
+if [ $# -eq 0 ]; then
+  # Register all
+  for username in $usernames; do
+    register_key $username $target
+  done
+elif [ $# -gt 0 ]; then
+  # Register all
+  for arg in $@; do
+    registered=0
+    for username in $usernames; do
+      if [[ $arg == $username ]]; then
+        register_key $username $target
+        registered=1
+      else
+        continue
+      fi
+    done
+    if [[ $registered == 0 ]]; then
+      echo "$arg is invalid username" >&2
+    fi
+  done
 fi
-unset organization target
+
+unset usernames
