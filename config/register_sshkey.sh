@@ -26,6 +26,7 @@ register_key() {
   local username=$1
   local target=$2
   printf "$username >> $target\n"
+  echo "## $username" >> $target
   wget -qO- https://github.com/${username}.keys >>$target
 }
 
