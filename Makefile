@@ -41,7 +41,7 @@ ubuntu-config-ssh-server: ubuntu-setup
 	./system/setup.sh
 	./config/register_sshkey.sh
 
-ubuntu-install-optional: ubuntu-ros2 ubuntu-vscode ubuntu-docker ubuntu-openocd
+ubuntu-install-optional: ubuntu-ros2 ubuntu-vscode ubuntu-docker ubuntu-openocd ubuntu-chrome
 	sudo apt install -y xsel
 
 ubuntu-ros2:
@@ -55,4 +55,7 @@ ubuntu-docker:
 
 ubuntu-openocd:
 	./install/openocd/install.sh
+
+ubuntu-chrome:
+	./install/chrome/install.sh
 

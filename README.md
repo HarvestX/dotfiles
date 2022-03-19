@@ -29,6 +29,7 @@ make config
 - ros2
 - vscode
 - openocd
+- Goolge Chrome
 
 To install optional packages, type
 ```bash
