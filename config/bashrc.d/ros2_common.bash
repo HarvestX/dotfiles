@@ -19,4 +19,5 @@ ros2_cli_setup() {
   source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
   source /usr/share/vcstool-completion/vcs.bash
   export _colcon_cd_root="$ros_ws"
+  export RCUTILS_COLORIZED_OUTPUT=1
 }
