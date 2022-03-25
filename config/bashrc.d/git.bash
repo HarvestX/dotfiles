@@ -16,14 +16,15 @@ function groot() {
       echo "$0: Can't get initial commit" 2>&1 && false && return
     root=$(git rev-parse --git-dir)/.. &&
       # subshell so we don't change the user's working directory
-    ( cd "$root" &&
-      if [[ $(git rev-list --parents HEAD | tail -1) = $first_commit ]]; then
-        pwd
-      else
-        echo "$FUNCNAME: git directory is not inside its repository" 2>&1
-        false
-      fi
-    )
+      (
+        cd "$root" &&
+          if [[ $(git rev-list --parents HEAD | tail -1) = $first_commit ]]; then
+            pwd
+          else
+            echo "$FUNCNAME: git directory is not inside its repository" 2>&1
+            false
+          fi
+      )
   else
     echo "$FUNCNAME: Can't determine repository root" 2>&1
     false
@@ -33,15 +34,14 @@ function groot() {
 # Change working directory to git repository root
 function rcd() {
   local root
-  root=$(groot) || return 1  # git_root will print any errors
+  root=$(groot) || return 1 # git_root will print any errors
   cd "$root"
 }
 
 # Delete local branch which does not exist on remote repositiory
 function gprune() {
-  git fetch -p && \
-    for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do\
-      git branch -D $branch; \
+  git fetch -p &&
+    for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do
+      git branch -D $branch
     done
 }
-
