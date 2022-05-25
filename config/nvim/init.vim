@@ -6,6 +6,7 @@ call plug#begin($CONFIG . "/nvim/plugged")
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
 Plug 'junegunn/fzf.vim'
+Plug 'elixir-editors/vim-elixir'
 call plug#end()
 
 
