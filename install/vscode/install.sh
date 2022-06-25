@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [[ $(uname -r) =~ WSL ]]; then
+  printf "WSL detected. Skip installation...\n"
+  exit 0
+fi
+
 # Install VSCode
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg
 sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
