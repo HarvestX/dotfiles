@@ -1,3 +1,6 @@
+<img src="https://harvestx.jp/img/logo-red.svg" width="30%">
+
+
 # dotfiles
 HarvestX dotfiles for Unix shell
 
