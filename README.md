@@ -30,7 +30,7 @@ make config
 
 ## Optinal Packages (Ubuntu 20.04)
 - docker & docker-compose
-- ros2
+- ros2 (galactic)
 - vscode
 - openocd
 - Goolge Chrome
