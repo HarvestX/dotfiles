@@ -4,6 +4,10 @@ HarvestX dotfiles for Unix shell
 ## About
 This Repository contains installation script and configurations for esseintial tools.
 
+## Requirements
+```bash
+sudo apt install make curl
+```
 
 ## Pasckages
 - tmux
