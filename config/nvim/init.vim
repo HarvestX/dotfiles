@@ -4,6 +4,7 @@ let $DATA = empty($XDG_DATA_HOME) ? expand('$HOME/.local/share') : $XDG_DATA_HOM
 
 if exists('g:vscode')
   " VSCode setup
+  set clipboard=unnamedplus
 else
   call plug#begin($CONFIG . "/nvim/plugged")
   Plug 'ntpeters/vim-better-whitespace'
