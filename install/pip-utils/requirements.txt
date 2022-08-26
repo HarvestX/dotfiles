@@ -1,0 +1,5 @@
+cpplint
+cmake-format
+flake8
+autopep8
+pylint

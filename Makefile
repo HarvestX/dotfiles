@@ -17,7 +17,7 @@ deploy: install
 	$(BIN_DIR)/gh auth login
 	$(shell exec -l $SHELL)
 
-install: tmux nvim fzf vimplug github-cli
+install: tmux nvim fzf vimplug github-cli pip-utils
 
 config:
 	./config/install.sh
@@ -36,6 +36,9 @@ vimplug:
 
 fzf:
 	./install/fzf/install.sh
+
+pip-utils:
+	./install/pip-utils/install.sh
 
 ubuntu-config-ssh-server: ubuntu-setup
 	./system/setup.sh
