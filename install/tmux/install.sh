@@ -1,17 +1,13 @@
 #!/usr/bin/env bash
 
-#!/bin/bash
-set eu
-cd `dirname $0`
+_linux_install() {
+  mkdir -p $HOME/.local/bin
+  wget https://github.com/m12watanabe1a/tmux-static-build/raw/"$(dpkg --print-architecture)"/tmux -P $HOME/.local/bin
+}
 
-TMUX_VERSION="3.2a"
-LIBEVENT_VERSION="2.1.11"
-NCURSES_VERSION="6.2"
-
-
-[ -e temp ] && rm -rf temp
-
-mkdir temp
-cd temp
-wget https://github.com/Tagussan/tmux-static-build/raw/main/tmux
-chmod u+x tmux
+archi=$(uname -sm)
+case "$archi" in
+Linux\ aarch64*) _linux_install ;;
+Linux\ *64) _linux_install ;;
+*) echo "Invalid architecture given: $archi" >&2 ;;
+esac

@@ -25,15 +25,15 @@ register_key() {
   # register_key $username $target
   local username=$1
   local target=$2
-  printf "$username >> $target\n"
-  echo "## $username" >> $target
+  echo "$username >> $target" >&2
+  echo "## $username" >>$target
   wget -qO- https://github.com/${username}.keys >>$target
 }
 
 usernames=$(get_org_users $organization)
 
-printf "Gettig username from $organization\n"
-printf "Add keys to $target\n"
+echo "Gettig username from $organization"
+wcho "Add keys to $target"
 echo "# $organization members" >$target
 
 if [ $# -eq 0 ]; then

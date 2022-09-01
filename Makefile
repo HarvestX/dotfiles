@@ -1,35 +1,25 @@
-.PHONY: config deploy vimplug fzf ubuntu-setup
-
-ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
-BIN_DIR = $(ROOT_DIR)/bin
-
-TMUX_DIR = ./install/tmux
-NVIM_DIR = ./install/nvim
-GITHUB_CLI_DIR = ./install/gh-cli
+.PHONY: config install deploy
 
 all: config install deploy
 
 deploy: install
-	mkdir -p $(BIN_DIR)
-	cp $(TMUX_DIR)/temp/tmux $(BIN_DIR)/tmux
-	cp $(NVIM_DIR)/temp/nvim $(BIN_DIR)/nvim
-	cp $(GITHUB_CLI_DIR)/temp/build/gh $(BIN_DIR)/gh
-	$(BIN_DIR)/gh auth login
-	$(shell exec -l $SHELL)
+	gh auth login
 
-install: tmux nvim fzf vimplug github-cli pip-utils
+
+# Install standard packages listed below
+install: tmux nvim fzf vimplug gh-cli pip-utils
 
 config:
 	./config/install.sh
 
 tmux:
-	$(TMUX_DIR)/install.sh
+	./install/tmux/install.sh
 
 nvim:
-	$(NVIM_DIR)/install.sh
+	./install/nvim/install.sh
 
-github-cli:
-	$(GITHUB_CLI_DIR)/install.sh
+gh-cli:
+	./install/gh-cli/install.sh
 
 vimplug:
 	./install/vimplug/install.sh
@@ -40,25 +30,27 @@ fzf:
 pip-utils:
 	./install/pip-utils/install.sh
 
-ubuntu-config-ssh-server: ubuntu-setup
+config-ssh-server:
 	./system/setup.sh
 	./config/register_sshkey.sh
 
-ubuntu-install-optional: ubuntu-ros2 ubuntu-vscode ubuntu-docker ubuntu-openocd ubuntu-chrome
+# Install Optional packages listed below
+install-optional: ros2 vscode docker chrome
 	sudo apt install -y xsel
 
-ubuntu-ros2:
-	./install/ros2/install_galactic.sh
+ros2:
+	./install/ros2/install.sh
 
-ubuntu-vscode:
+vscode:
 	./install/vscode/install.sh
 
-ubuntu-docker:
+docker:
 	./install/docker/install.sh
 
-ubuntu-openocd:
-	./install/openocd/install.sh
-
-ubuntu-chrome:
+chrome:
 	./install/chrome/install.sh
+
+# Not Installed by default
+openocd:
+	./install/openocd/install.sh
 
