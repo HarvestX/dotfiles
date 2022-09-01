@@ -2,9 +2,8 @@
 
 
 # dotfiles
-HarvestX dotfiles for Unix shell
+HarvestX dotfiles for Unix shell.
 
-## About
 This Repository contains installation script and configurations for essential tools.
 
 ## Requirements
