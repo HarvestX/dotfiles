@@ -5,14 +5,14 @@
 HarvestX dotfiles for Unix shell
 
 ## About
-This Repository contains installation script and configurations for esseintial tools.
+This Repository contains installation script and configurations for essential tools.
 
 ## Requirements
 ```bash
 sudo apt install make curl
 ```
 
-## Pasckages
+## Packages
 - tmux
 - nvim
 - fzf
@@ -31,21 +31,21 @@ make config
 ```
 
 
-## Optinal Packages (Ubuntu 20.04)
+## Optional Packages
 - docker & docker-compose
 - ros2 (galactic)
 - vscode
-- openocd
-- Goolge Chrome
+- Google Chrome
 
 To install optional packages, type
 ```bash
-make ubuntu-install-optional
+make install-optional
 ```
-## SSH server and x11vnc setup (Ubuntu 20.04)
+
+## SSH server and x11vnc setup
 To setup ssh server and x11vnc,
 ```bash
-make ubuntu-config-ssh-server
+make config-ssh-server
 ```
 And it will ask
 - SSH port to open.

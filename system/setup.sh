@@ -35,15 +35,15 @@ ask_port() {
   while true; do
     read -p "Type $1: " -r
     if ! $(is_valid_number $REPLY); then
-      printf "Please type valid port number.\n"
+      echo "Please type valid port number." >&2
       continue
     fi
     if ! $(is_valid_port_range $REPLY); then
-      printf "Given port $1 is out of available port range [0-65535].\n"
+      echo "Given port $1 is out of available port range [0-65535]." >&2
       continue
     fi
     if ! $(is_available_port $REPLY); then
-      printf "Given port $1 is already in use.\n"
+      echo "Given port $1 is already in use." >&2
       continue
     fi
     # Here finally the number is valid
@@ -52,21 +52,60 @@ ask_port() {
   done
 }
 
-## setup
-sudo apt install -y openssh-server x11vnc xvfb jq
-ssh_port=$(ask_port SSH_PORT)
-sudo cp -f $THIS_DIR/sshd_config /etc/ssh/sshd_config
-sudo sed -i "s/#Port 22/Port $ssh_port/g" /etc/ssh/sshd_config
-sudo service ssh restart
-sudo x11vnc -storepasswd /etc/.vncpasswd
-sudo cp -f $THIS_DIR/x11vnc.service /etc/systemd/system/x11vnc.service
-vnc_port=$(ask_port X11VNC_PORT)
-sudo sed -i "s/<PORT_PLACEHOLDER>/$vnc_port/g" /etc/systemd/system/x11vnc.service
-sudo systemctl enable x11vnc.service
-sudo systemctl start x11vnc.service
+_linux_setup() {
+  if [ -f /etc/os-release ]; then
+    # freedesktop.org and systemd
+    . /etc/os-release
+    OS=$NAME
+    VER=$VERSION_ID
+  elif type lsb_release >/dev/null 2>&1; then
+    # linuxbase.org
+    OS=$(lsb_release -si)
+    VER=$(lsb_release -sr)
+  elif [ -f /etc/lsb-release ]; then
+    # For some versions of Debian/Ubuntu without lsb_release command
+    . /etc/lsb-release
+    OS=$DISTRIB_ID
+    VER=$DISTRIB_RELEASE
+  elif [ -f /etc/debian_version ]; then
+    # Older Debian/Ubuntu/etc.
+    OS=Debian
+    VER=$(cat /etc/debian_version)
+  else
+    echo "Can not detect destribution" >&2
+  fi
 
-unset ssh_port
-unset vnc_port
+  case "$OS" in
+  Ubuntu)
+    ## setup
+    sudo apt install -y openssh-server x11vnc xvfb jq
+    ssh_port=$(ask_port SSH_PORT)
+    sudo cp -f $THIS_DIR/sshd_config /etc/ssh/sshd_config
+    sudo sed -i "s/#Port 22/Port $ssh_port/g" /etc/ssh/sshd_config
+    sudo service ssh restart
+    sudo x11vnc -storepasswd /etc/.vncpasswd
+    sudo cp -f $THIS_DIR/x11vnc.service /etc/systemd/system/x11vnc.service
+    vnc_port=$(ask_port X11VNC_PORT)
+    sudo sed -i "s/<PORT_PLACEHOLDER>/$vnc_port/g" /etc/systemd/system/x11vnc.service
+    sudo systemctl enable x11vnc.service
+    sudo systemctl start x11vnc.service
 
-unset THIS_FILE
-unset THIS_DIR
+    unset ssh_port
+    unset vnc_port
+
+    unset THIS_FILE
+    unset THIS_DIR
+    ;;
+  *)
+    echo "Installer for $OS is not prepared yet" >&2
+    return
+    ;;
+  esac
+}
+
+archi=$(uname -sm)
+case "$archi" in
+Linux\ aarch64*) _linux_setup ;;
+Linux\ *64) _linux_setup ;;
+*) echo "Invalid architecture given: $archi" >&2 ;;
+esac
