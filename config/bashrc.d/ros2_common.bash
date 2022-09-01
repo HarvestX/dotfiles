@@ -12,6 +12,13 @@ ccolbuil() {
   colcon build --cmake-clean-first --cmake-args '-DCMAKE_BUILD_TYPE=Release' --symlink-install $@
 }
 
+colcheck() {
+  local pkg=$1
+  colcon build --packages-select $pkg
+  colcon test --packages-select $pkg
+  colcon test-result --verbose
+}
+
 ros2_cli_setup() {
   # Command
   local ros_ws=$1
