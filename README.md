@@ -15,24 +15,21 @@ This Repository contains installation script and configurations for essential to
 sudo apt install -y make
 ```
 
-## Packages
+## Setup
+Following packages will be installed.
+
 - tmux
 - nvim
 - fzf
 - vimplug
 - github-cli
 
+And some useful shell scripts will be available.
+
 To setup, type
 ```bash
 make
 ```
-
-## Configuration
-To set configuration, type
-```bash
-make config
-```
-
 
 ## Optional Packages
 - docker & docker-compose
