@@ -29,7 +29,7 @@ _linux_install() {
 
   case "$OS" in
   Ubuntu)
-    sudo apt install python3-pip
+    sudo apt-get install python3-pip
     ;;
   *)
     echo "Installer for $OS is not prepared yet" >&2

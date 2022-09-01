@@ -78,7 +78,7 @@ _linux_setup() {
   case "$OS" in
   Ubuntu)
     ## setup
-    sudo apt install -y openssh-server x11vnc xvfb jq
+    sudo apt-get install -y openssh-server x11vnc xvfb jq
     ssh_port=$(ask_port SSH_PORT)
     sudo cp -f $THIS_DIR/sshd_config /etc/ssh/sshd_config
     sudo sed -i "s/#Port 22/Port $ssh_port/g" /etc/ssh/sshd_config

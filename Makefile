@@ -36,7 +36,6 @@ config-ssh-server:
 
 # Install Optional packages listed below
 install-optional: ros2 vscode docker chrome
-	sudo apt install -y xsel
 
 ros2:
 	./install/ros2/install.sh

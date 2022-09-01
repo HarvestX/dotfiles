@@ -45,7 +45,7 @@ _linux_install() {
   Ubuntu)
     sudo bash -c 'echo "deb [arch=${1}] http://dl.google.com/linux/chrome/deb/ stable main" >>/etc/apt/sources.list.d/google-chrome.list'
     sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-    sudo apt update && sudo apt install -y google-chrome-stable
+    sudo apt-get update && sudo apt-get install -y google-chrome-stable
     ;;
   *)
     echo "Installer for $OS is not prepared yet" >&2

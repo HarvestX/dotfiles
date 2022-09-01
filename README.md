@@ -8,8 +8,11 @@ HarvestX dotfiles for Unix shell
 This Repository contains installation script and configurations for essential tools.
 
 ## Requirements
+- `make`
+
+### Ubuntu
 ```bash
-sudo apt install make curl
+sudo apt install -y make
 ```
 
 ## Packages

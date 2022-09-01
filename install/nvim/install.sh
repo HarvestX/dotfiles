@@ -62,8 +62,8 @@ _linux_install() {
     case "$OS" in
     Ubuntu)
       wget https://github.com/neovim/neovim/releases/download/v${NVIM_VERSION}/nvim-linux64.deb
-      sudo apt install -y ./nvim-linux64.deb
-      sudo apt update && sudo apt install -y neovim
+      sudo apt-get install -y ./nvim-linux64.deb
+      sudo apt-get update && sudo apt-get install -y neovim
       rm ./nvim-linux64.deb
       ;;
     *)

@@ -6,15 +6,15 @@ cd $(dirname $0)
 _install_ubuntu() {
   ROS_DISTRO="${1}"
 
-  sudo apt update && sudo apt install -y curl gnupg2 lsb-release
+  sudo apt-get update && sudo apt-get install -y curl gnupg2 lsb-release
   sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/ros2.list >/dev/null
 
-  sudo apt update && sudo apt install -y \
+  sudo apt-get update && sudo apt-get install -y \
     ros-${ROS_DISTRO}-desktop \
     python3-rosdep
 
-  sudo apt update && sudo apt install -y \
+  sudo apt-get update && sudo apt-get install -y \
     build-essential \
     cmake \
     git \
@@ -25,7 +25,7 @@ _install_ubuntu() {
 
   python3 -m pip install flake8
 
-  sudo apt update && sudo apt install -y \
+  sudo apt-get update && sudo apt-get install -y \
     python3-pytest-cov \
     python3-rosdep \
     python3-setuptools \
@@ -46,11 +46,11 @@ _install_ubuntu() {
     pytest-rerunfailures \
     pytest
 
-  sudo apt install --no-install-recommends -y \
+  sudo apt-get install --no-install-recommends -y \
     libasio-dev \
     libtinyxml2-dev
 
-  sudo apt install --no-install-recommends -y \
+  sudo apt-get install --no-install-recommends -y \
     libcunit1-dev
 
   sudo rosdep init

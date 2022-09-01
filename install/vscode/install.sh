@@ -39,9 +39,9 @@ _linux_install() {
     sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
     sudo bash -c 'echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" >/etc/apt/sources.list.d/vscode.list'
     rm -f packages.microsoft.gpg
-    sudo apt install apt-transport-https
-    sudo apt update
-    sudo apt install code
+    sudo apt-get install apt-transport-https
+    sudo apt-get update
+    sudo apt-get install code
     ;;
   *)
     echo "Installer for $OS is not prepared yet" >&2
