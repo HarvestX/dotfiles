@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set eu
+cd $(dirname $0)
+
 _linux_install() {
   # Install Open OCD
   mkdir -p $HOME/.local/src && cd $HOME/.local/src

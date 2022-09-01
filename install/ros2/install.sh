@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set eu
+cd $(dirname $0)
+
 _install_ubuntu() {
   ROS_DISTRO="${1}"
 

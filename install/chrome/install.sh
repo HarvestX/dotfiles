@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set eu
+cd $(dirname $0)
+
 _linux_install() {
   case "${1}" in
   arm64)

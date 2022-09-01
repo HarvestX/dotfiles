@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+set eu
+cd $(dirname $0)
+
 NVIM_VERSION="0.7.2"
 
 _linux_build() {

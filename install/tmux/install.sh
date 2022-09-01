@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+set eu
+cd $(dirname $0)
+
 _linux_install() {
   mkdir -p $HOME/.local/bin
   wget https://github.com/m12watanabe1a/tmux-static-build/raw/"$(dpkg --print-architecture)"/tmux -P $HOME/.local/bin
