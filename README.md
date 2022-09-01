@@ -24,7 +24,7 @@ sudo apt install -y make
 
 To setup, type
 ```bash
-make deploy
+make
 ```
 
 ## Configuration
