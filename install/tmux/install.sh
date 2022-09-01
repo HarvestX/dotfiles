@@ -4,8 +4,10 @@ set eu
 cd $(dirname $0)
 
 _linux_install() {
+  destination=$HOME/.local/bin
   mkdir -p $HOME/.local/bin
-  wget https://github.com/m12watanabe1a/tmux-static-build/raw/"$(dpkg --print-architecture)"/tmux -P $HOME/.local/bin
+  wget https://github.com/m12watanabe1a/tmux-static-build/raw/"$(dpkg --print-architecture)"/tmux -P $destination
+  chmod +x $destination/tmux
 }
 
 archi=$(uname -sm)
