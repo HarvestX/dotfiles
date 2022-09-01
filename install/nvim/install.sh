@@ -14,7 +14,8 @@ _linux_build() {
   fi
 
   tar -xvf v$NVIM_VERSION.tar.gz
-  mv -r neovim-${NVIM_VERSION} $HOME/.local/src
+  mkdir -p $HOME/.local/src
+  mv neovim-${NVIM_VERSION} $HOME/.local/src
   cd $HOME/.local/src/neovim-${NVIM_VERSION}
   make CMAKE_BUILD_TYPE=RelWithDebInfo CMAKE_INSTALL_PREFIX=$HOME/.local
   make install
