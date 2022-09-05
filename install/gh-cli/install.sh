@@ -3,6 +3,8 @@
 set eu
 cd $(dirname $0)
 
+GH_VERSION="2.14.7"
+
 _linux_install() {
   if [ -f /etc/os-release ]; then
     # freedesktop.org and systemd
@@ -29,13 +31,9 @@ _linux_install() {
 
   case "$OS" in
   Ubuntu)
-    sudo apt-get install -y curl
-    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-    sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" |
-      sudo tee /etc/apt/sources.list.d/github-cli.list
-    sudo apt-get update >/dev/null &&
-      sudo apt-get install gh -y
+    wget "https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_$(dpkg --print-architecture).deb"
+    sudo apt install -y "./gh_${GH_VERSION}_linux_$(dpkg --print-architecture).deb"
+    rm "./gh_${GH_VERSION}_linux_$(dpkg --print-architecture)".deb
     ;;
   *)
     echo "Installer for $OS is not prepared yet\n" >&2
