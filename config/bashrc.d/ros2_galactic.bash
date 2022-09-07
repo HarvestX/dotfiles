@@ -4,7 +4,21 @@
 galactic_devel_setup() {
   export ROS_DISTRO=galactic
 
-  local ros_ws="$HOME/ws_$ROS_DISTRO"
+  local ws_name
+  case $# in
+  0)
+    ws_name=$ROS_DISTRO
+    ;;
+  1)
+    ws_name=$1
+    ;;
+  *)
+    echo "Invalid number of argument given." >&2
+    return
+    ;;
+  esac
+
+  local ros_ws="$HOME/ws_$ws_name"
   source /opt/ros/$ROS_DISTRO/setup.bash
 
   # CLI tool setup
@@ -22,7 +36,21 @@ galactic_devel_setup() {
 galactic_exec_setup() {
   export ROS_DISTRO=galactic
 
-  local ros_ws="$HOME/ws_$ROS_DISTRO"
+  local ws_name
+  case $# in
+  0)
+    ws_name=$ROS_DISTRO
+    ;;
+  1)
+    ws_name=$1
+    ;;
+  *)
+    echo "Invalid number of argument given." >&2
+    return
+    ;;
+  esac
+
+  local ros_ws="$HOME/ws_$ws_name"
   source "$ros_ws/install/setup.bash"
 
   # CLI tool setup
@@ -40,11 +68,26 @@ galactic_exec_setup() {
 galactic_open() {
   local ROS_DISTRO="galactic"
   local session_name="${ROS_DISTRO}_ide"
+
+  local ws_name
+  case $# in
+  0)
+    ws_name=$ROS_DISTRO
+    ;;
+  1)
+    ws_name=$1
+    ;;
+  *)
+    echo "Invalid number of argument given." >&2
+    return
+    ;;
+  esac
+
   tmux new-session -s $session_name \; \
     split-window -v \; \
     select-pane -t 0 \; \
-    send-keys -t 0 "${ROS_DISTRO}_devel_setup" C-m \; \
-    send-keys -t 1 "${ROS_DISTRO}_exec_setup" C-m \;
+    send-keys -t 0 "${ROS_DISTRO}_devel_setup $ws_name" C-m \; \
+    send-keys -t 1 "${ROS_DISTRO}_exec_setup $ws_name" C-m \;
 }
 
 # Close tmux panes
