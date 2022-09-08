@@ -31,9 +31,11 @@ _linux_install() {
 
   case "$OS" in
   Ubuntu)
-    wget "https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_$(dpkg --print-architecture).deb"
-    sudo apt install -y "./gh_${GH_VERSION}_linux_$(dpkg --print-architecture).deb"
-    rm "./gh_${GH_VERSION}_linux_$(dpkg --print-architecture)".deb
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+    sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
+    sudo apt update
+    sudo apt install gh -y
     ;;
   *)
     echo "Installer for $OS is not prepared yet\n" >&2
