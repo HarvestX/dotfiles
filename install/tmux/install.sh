@@ -8,10 +8,6 @@ _linux_install() {
   mkdir -p $HOME/.local/bin
   wget https://github.com/m12watanabe1a/tmux-static-build/raw/"$(dpkg --print-architecture)"/tmux -P $destination
   chmod +x $destination/tmux
-  if [[ $(uname -r) =~ WSL ]]; then
-    sudo ln -sf /usr/share/terminfo/x/xterm-color /usr/share/terminfo/x/xterm-256color
-    return
-  fi
 }
 
 archi=$(uname -sm)
