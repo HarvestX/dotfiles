@@ -40,7 +40,7 @@ _linux_install() {
   # Upgrade pip first
   python3 -m pip install -U pip
   # Install utilities
-  python3 -m pip install -r requirements.txt
+  python3 -m pip install --upgrade -r requirements.txt
 }
 
 archi=$(uname -sm)
