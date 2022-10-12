@@ -45,7 +45,7 @@ _linux_install() {
   git submodule update --init --recursive
   mkdir build
   cd build
-  cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/local
+  cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/.local
   make -j4
   make install
 }
