@@ -49,6 +49,9 @@ docker:
 chrome:
 	./install/chrome/install.sh
 
+groot:
+	./install/groot/install.sh
+
 # Not Installed by default
 openocd:
 	./install/openocd/install.sh

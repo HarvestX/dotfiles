@@ -41,6 +41,11 @@ To install optional packages, type
 make install-optional
 ```
 
+## Extra
+- Groot
+  - `make groot`
+
+
 ## SSH server and x11vnc setup
 To setup ssh server and x11vnc,
 ```bash
