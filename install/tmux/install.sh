@@ -6,8 +6,13 @@ cd $(dirname $0)
 _linux_install() {
   destination=$HOME/.local/bin
   mkdir -p $HOME/.local/bin
-  wget https://github.com/m12watanabe1a/tmux-static-build/raw/"$(dpkg --print-architecture)"/tmux -P $destination
-  chmod +x $destination/tmux
+  if [[ ! -x $HOME/.local/bin/tmux ]]; then
+    wget https://github.com/m12watanabe1a/tmux-static-build/raw/"$(dpkg --print-architecture)"/tmux -P $destination
+    chmod +x $destination/tmux
+  else
+    echo "Tmux already installed" >&2
+    return
+  fi
 }
 
 archi=$(uname -sm)
