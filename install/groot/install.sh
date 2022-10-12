@@ -3,6 +3,19 @@
 set eu
 cd $(dirname $0)
 
+_build() {
+  # Build && install Groot
+  mkdir -p $HOME/.local/src && cd $HOME/.local/src
+  git clone https://github.com/BehaviorTree/Groot.git
+  cd Groot
+  git submodule update --init --recursive
+  mkdir build
+  cd build
+  cmake ..
+  make -j4
+  sudo make install
+}
+
 _linux_install() {
   # Install dependencies
   if [ -f /etc/os-release ]; then
@@ -31,23 +44,14 @@ _linux_install() {
   case "$OS" in
   Ubuntu)
     sudo apt install qtbase5-dev libqt5svg5-dev libzmq3-dev libdw-dev
+    _build
+    ldconfig
     ;;
   *)
     echo "Installer for $OS is not prepared yet\n" >&2
     return
     ;;
   esac
-
-  # Install Groot
-  mkdir -p $HOME/.local/src && cd $HOME/.local/src
-  git clone https://github.com/BehaviorTree/Groot.git
-  cd Groot
-  git submodule update --init --recursive
-  mkdir build
-  cd build
-  cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/.local
-  make -j4
-  make install
 }
 
 archi=$(uname -sm)
