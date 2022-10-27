@@ -14,7 +14,7 @@ ccolbuil() {
 
 colcheck() {
   local pkg=$1
-  colcon build --packages-select $pkg
+  colcon build --packages-up-to $pkg
   colcon test --packages-select $pkg
   colcon test-result --verbose
 }
