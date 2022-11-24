@@ -13,6 +13,12 @@ _linux_install() {
     echo "Tmux already installed" >&2
     return
   fi
+
+  case "$OS" in
+  Ubuntu)
+    sudo apt-get install -y ncurses-term
+    ;;
+  esac
 }
 
 archi=$(uname -sm)
