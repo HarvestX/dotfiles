@@ -4,7 +4,7 @@ all: config install deploy
 
 deploy: install
 	gh auth login
-
+	gh config set editor nvim
 
 # Install standard packages listed below
 install: tmux nvim fzf vimplug gh-cli pip-utils
