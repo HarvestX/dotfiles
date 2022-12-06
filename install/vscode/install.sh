@@ -55,7 +55,6 @@ _linux_install() {
   code --install-extension redhat.vscode-xml                     # XML formatter
   code --install-extension eamodio.gitlens                       # Git Lens
   code --install-extension twxs.cmake                            # CMake syntax
-  code --install-extension cheshirekow.cmake-format              # Cmake formatter
   code --install-extension streetsidesoftware.code-spell-checker # English spell checker
   code --install-extension shardulm94.trailing-spaces            # Whitespace visualiz A
   code --install-extension Gruntfuggly.todo-tree                 # Annotation comment checker
