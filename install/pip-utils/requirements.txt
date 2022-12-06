@@ -1,5 +1,4 @@
 cpplint
-cmake-format
 flake8 < 5.0.0
 autopep8
 pylint
