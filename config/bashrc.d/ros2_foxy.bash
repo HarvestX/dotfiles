@@ -11,7 +11,9 @@ foxy_devel_setup() {
   ros2_cli_setup $ros_ws
 
   # Update Prompt
-  PS1="\e[1;92m\u@\h\e[0m \[\e[93m\]\w\[\e[91m\]\$(__git_ps1)\[\e[0m \e[1;33m\]<$ROS_DISTRO🔧>\e[0m\n$ "
+  if [[ $PS1 != *"$ROS_DISTRO"* ]]; then
+    PS1=${PS1::-4}" \e[1;33m\]<$ROS_DISTRO🔧>\e[0m\n$ "
+  fi
 
   # Create direcotry
   mkdir -p $ros_ws
@@ -29,7 +31,9 @@ foxy_exec_setup() {
   ros2_cli_setup $ros_ws
 
   # Update Prompt
-  PS1="\e[1;92m\u@\h\e[0m \[\e[93m\]\w\[\e[91m\]\$(__git_ps1)\[\e[0m \e[1;96m\]<$ROS_DISTRO🎬>\e[0m\n$ "
+  if [[ $PS1 != *"$ROS_DISTRO"* ]]; then
+    PS1=${PS1::-4}" \e[1;96m\]<$ROS_DISTRO🎬>\e[0m\n$ "
+  fi
 
   # Create directory
   mkdir -p $ros_ws/src
