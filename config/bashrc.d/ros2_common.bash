@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 colbuil() {
-  colcon build --cmake-args '-DCMAKE_BUILD_TYPE=Release' --symlink-install $@
+  colcon build --cmake-args '-DCMAKE_BUILD_TYPE=Release' $@
 }
 
 colclean() {
@@ -9,7 +9,7 @@ colclean() {
 }
 
 ccolbuil() {
-  colcon build --cmake-clean-first --cmake-args '-DCMAKE_BUILD_TYPE=Release' --symlink-install $@
+  colbuil --cmake-clean-first $@
 }
 
 colcheck() {
