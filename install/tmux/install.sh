@@ -3,7 +3,7 @@
 set eu
 cd $(dirname $0)
 
-_linux_install() {
+_get_static_built_binary() {
   destination=$HOME/.local/bin
   mkdir -p $HOME/.local/bin
   if [[ ! -x $HOME/.local/bin/tmux ]]; then
@@ -13,7 +13,9 @@ _linux_install() {
     echo "Tmux already installed" >&2
     return
   fi
+}
 
+_linux_install() {
   if [ -f /etc/os-release ]; then
     # freedesktop.org and systemd
     . /etc/os-release
@@ -36,9 +38,22 @@ _linux_install() {
     echo "Can not detect destribution" >&2
     return
   fi
+
   case "$OS" in
   Ubuntu)
-    sudo apt-get install -y ncurses-term
+    case "$VER" in
+    20.04)
+      _get_static_built_binary
+      sudo apt-get install -y ncurses-term
+      ;;
+    22.04)
+      sudo apt-get install -y tmux
+      ;;
+    esac
+    ;;
+  *)
+    echo "Installer for $OS is not prepared yet" >&2
+    return
     ;;
   esac
 }
