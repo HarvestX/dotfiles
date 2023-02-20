@@ -12,7 +12,8 @@ _install_ubuntu() {
 
   sudo apt-get update && sudo apt-get install -y \
     ros-${ROS_DISTRO}-desktop \
-    python3-rosdep
+    python3-rosdep \
+    ros-dev-tools
 
   sudo apt-get update && sudo apt-get install -y \
     build-essential \
