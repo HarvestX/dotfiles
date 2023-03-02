@@ -87,11 +87,17 @@ galactic_open() {
     ;;
   esac
 
-  tmux new-session -s $session_name \; \
-    split-window -v \; \
-    select-pane -t 0 \; \
-    send-keys -t 0 "${ROS_DISTRO}_devel_setup $ws_name" C-m \; \
-    send-keys -t 1 "${ROS_DISTRO}_exec_setup $ws_name" C-m \;
+  tmux has-session -t $session_name 2>/dev/null
+
+  if [ $? != 0 ]; then
+    tmux new-session -s $session_name \; \
+      split-window -v \; \
+      select-pane -t 0 \; \
+      send-keys -t 0 "${ROS_DISTRO}_devel_setup $ws_name" C-m \; \
+      send-keys -t 1 "${ROS_DISTRO}_exec_setup $ws_name" C-m \;
+  else
+    tmux attach -t $session_name
+  fi
 }
 
 # Close tmux panes
