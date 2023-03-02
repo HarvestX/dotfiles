@@ -32,7 +32,7 @@ make
 
 ## Optional Packages
 - docker & docker-compose
-- ros2 (galactic)
+- ros2 (humble)
 - vscode
 - Google Chrome
 
