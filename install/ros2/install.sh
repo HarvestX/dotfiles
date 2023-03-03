@@ -3,13 +3,8 @@
 set eu
 cd $(dirname $0)
 
-_install_ubuntu() {
+_install_ubuntu20() {
   ROS_DISTRO="${1}"
-
-  sudo apt-get update && sudo apt-get install -y curl gnupg2 lsb-release
-  sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
-  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/ros2.list >/dev/null
-
   sudo apt-get update && sudo apt-get install -y \
     ros-${ROS_DISTRO}-desktop \
     python3-rosdep \
@@ -53,6 +48,41 @@ _install_ubuntu() {
 
   sudo apt-get install --no-install-recommends -y \
     libcunit1-dev
+}
+
+_install_ubuntu22() {
+  ROS_DISTRO="${1}"
+
+  sudo apt-get update && sudo apt-get install -y \
+    ros-${ROS_DISTRO}-desktop \
+    python3-rosdep \
+    ros-dev-tools
+
+  sudo apt update && sudo apt install -y \
+    python3-flake8-docstrings \
+    python3-pip \
+    python3-pytest-cov \
+    ros-dev-tools
+}
+
+_install_ubuntu() {
+  ROS_DISTRO="${1}"
+
+  sudo apt-get update && sudo apt-get install -y curl gnupg2 lsb-release
+  sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/ros2.list >/dev/null
+
+  case "$ROS_DISTRO" in
+  foxy)
+    echo "Install $ROS_DISTRO"
+    ;&
+  galactic)
+    _install_ubuntu20 $ROS_DISTRO
+    ;;
+  humble)
+    _install_ubuntu22 $ROS_DISTRO
+    ;;
+  esac
 
   sudo rosdep init
   rosdep update
