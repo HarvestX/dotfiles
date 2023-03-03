@@ -63,6 +63,10 @@ _install_ubuntu22() {
     python3-pip \
     python3-pytest-cov \
     ros-dev-tools
+
+  python3 -m pip install -U \
+    flake8==3.7.9 \
+    pytest-flake8==1.0.4
 }
 
 _install_ubuntu() {
@@ -74,7 +78,7 @@ _install_ubuntu() {
 
   case "$ROS_DISTRO" in
   foxy)
-    echo "Install $ROS_DISTRO"
+    # Fall throug to the next case
     ;&
   galactic)
     _install_ubuntu20 $ROS_DISTRO
