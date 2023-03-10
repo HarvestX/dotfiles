@@ -66,7 +66,8 @@ _install_ubuntu22() {
 
   python3 -m pip install -U \
     flake8==3.7.9 \
-    pytest-flake8==1.0.4
+    pytest-flake8==1.0.4 \
+    setuptools==58.2.0
 }
 
 _install_ubuntu() {
