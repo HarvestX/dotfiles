@@ -78,23 +78,10 @@ _linux_setup() {
   case "$OS" in
   Ubuntu)
     ## setup
-    sudo apt-get install -y openssh-server x11vnc xvfb jq
-    ssh_port=$(ask_port SSH_PORT)
-    sudo cp -f $THIS_DIR/sshd_config /etc/ssh/sshd_config
+    sudo apt-get install -y openssh-server
+    local ssh_port=$(ask_port SSH_PORT)
     sudo sed -i "s/#Port 22/Port $ssh_port/g" /etc/ssh/sshd_config
     sudo service ssh restart
-    sudo x11vnc -storepasswd /etc/.vncpasswd
-    sudo cp -f $THIS_DIR/x11vnc.service /etc/systemd/system/x11vnc.service
-    vnc_port=$(ask_port X11VNC_PORT)
-    sudo sed -i "s/<PORT_PLACEHOLDER>/$vnc_port/g" /etc/systemd/system/x11vnc.service
-    sudo systemctl enable x11vnc.service
-    sudo systemctl start x11vnc.service
-
-    unset ssh_port
-    unset vnc_port
-
-    unset THIS_FILE
-    unset THIS_DIR
     ;;
   *)
     echo "Installer for $OS is not prepared yet" >&2
