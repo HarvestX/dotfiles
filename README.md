@@ -53,6 +53,5 @@ make config-ssh-server
 ```
 And it will ask
 - SSH port to open.
-- vnc password.
-- x11vnc forwarding port to open.
+
 
