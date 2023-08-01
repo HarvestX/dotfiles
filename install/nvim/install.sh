@@ -3,7 +3,7 @@
 set eu
 cd $(dirname $0)
 
-NVIM_VERSION="0.8.1"
+NVIM_VERSION="0.8.3"
 
 _linux_build() {
   mkdir -p temp
