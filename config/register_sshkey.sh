@@ -33,7 +33,7 @@ register_key() {
 usernames=$(get_org_users $organization)
 
 echo "Gettig username from $organization"
-wcho "Add keys to $target"
+echo "Add keys to $target"
 echo "# $organization members" >$target
 
 if [ $# -eq 0 ]; then
