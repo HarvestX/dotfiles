@@ -78,6 +78,7 @@ _linux_setup() {
   case "$OS" in
   Ubuntu)
     ## setup
+    sudo apt install -y jq net-tools
     sudo apt-get install -y openssh-server
     local ssh_port=$(ask_port SSH_PORT)
     sudo sed -i "s/#Port 22/Port $ssh_port/g" /etc/ssh/sshd_config
