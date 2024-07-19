@@ -3,6 +3,9 @@
 organization="HarvestX"
 target=$HOME/.ssh/authorized_keys
 
+# Ensure .ssh directory exists
+mkdir -p $HOME/.ssh
+
 get_org_users() {
   ## get_username_list organization
   local username
@@ -33,7 +36,7 @@ register_key() {
 usernames=$(get_org_users $organization)
 
 echo "Gettig username from $organization"
-wcho "Add keys to $target"
+echo "Add keys to $target"
 echo "# $organization members" >$target
 
 if [ $# -eq 0 ]; then
