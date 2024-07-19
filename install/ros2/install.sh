@@ -70,6 +70,15 @@ _install_ubuntu22() {
     setuptools==58.2.0
 }
 
+_install_ubuntu24() {
+  ROS_DISTRO="${1}"
+
+  sudo apt-get update && sudo apt-get install -y \
+    ros-${ROS_DISTRO}-desktop \
+    python3-rosdep \
+    ros-dev-tools
+}
+
 _install_ubuntu() {
   ROS_DISTRO="${1}"
 
@@ -86,6 +95,9 @@ _install_ubuntu() {
     ;;
   humble)
     _install_ubuntu22 $ROS_DISTRO
+    ;;
+  jazzy)
+    _install_ubuntu24 $ROS_DISTRO
     ;;
   esac
 
@@ -126,6 +138,9 @@ _linux_install() {
       ;;
     22.04)
       _install_ubuntu humble
+      ;;
+    24.04)
+      _install_ubuntu jazzy
       ;;
     esac
     ;;

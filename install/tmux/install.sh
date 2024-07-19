@@ -49,6 +49,9 @@ _linux_install() {
     22.04)
       sudo apt-get install -y tmux ncurses-term
       ;;
+    24.04)
+      sudo apt-get install -y tmux ncurses-term
+      ;;
     esac
     ;;
   *)
