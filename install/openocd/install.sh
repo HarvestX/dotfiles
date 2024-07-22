@@ -15,6 +15,8 @@ _linux_install() {
   make
   make install
   sudo cp contrib/60-openocd.rules /etc/udev/rules.d
+  sudo udevadm control --reload-rules
+  sudo udevadm trigger
 }
 
 archi=$(uname -sm)
