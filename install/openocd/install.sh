@@ -12,7 +12,9 @@ _linux_install() {
   cd openocd
   ./bootstrap
   ./configure --prefix=$HOME/.local
+  make
   make install
+  exec $SHELL -l #Reflects openocd installation.
 }
 
 archi=$(uname -sm)
