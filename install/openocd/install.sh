@@ -14,7 +14,6 @@ _linux_install() {
   ./configure --prefix=$HOME/.local
   make
   make install
-  exec $SHELL -l #Reflects openocd installation.
 }
 
 archi=$(uname -sm)
