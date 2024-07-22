@@ -14,6 +14,7 @@ _linux_install() {
   ./configure --prefix=$HOME/.local
   make
   make install
+  sudo cp contrib/60-openocd.rules /etc/udev/rules.d
 }
 
 archi=$(uname -sm)
