@@ -27,6 +27,15 @@ _linux_install() {
     return
   fi
 
+  case "$VER" in
+  24.04)
+    echo "Since Python 3.11, venv is required to use pip." >&2
+    exit 0
+    ;;
+  *)
+  esac
+
+
   case "$OS" in
   Ubuntu)
     sudo apt-get install python3-pip
